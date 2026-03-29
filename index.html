@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#00417b" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Gov.br" />
+  <meta name="application-name" content="Gov.br" />
+  <meta name="description" content="Acesso aos serviços do Governo Federal" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>Gov.br - Acesso</title>
+
+  <!-- Design System GOV.BR (@govbr-ds/core) via CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govbr-ds/core@3.7.0/dist/core.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+</head>
+<body>
+  <div id="app" class="app app--login">
+    <!-- 1. Tela de Login (botão principal, texto, opções com ícones azuis, versão) -->
+    <main id="view-login" class="view view-active" role="main" aria-label="Login">
+      <div class="login-screen">
+        <div class="login-content">
+          <button type="button" class="btn-govbr" id="btn-entrar" aria-label="Entrar com gov.br">
+            Entrar com gov.br
+          </button>
+          <p class="login-subtitle">Clique para criar ou acessar sua conta gov.br</p>
+          <a href="#" class="login-link" id="link-codigo" aria-label="Gerar código de acesso">
+            <span class="login-link__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            </span>
+            <span class="login-link__text">Gerar código de acesso</span>
+          </a>
+          <a href="#" class="login-link" id="btn-qr" aria-label="Ler QR Code">
+            <span class="login-link__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h5v5H3V3zm2 2v1h1V5H5zm10-2h5v5h-5V3zm2 2v1h1V5h-1zM3 14h5v5H3v-5zm2 2v1h1v-1H5zm10-2h5v5h-5v-5zm2 2v1h1v-1h-1zm-6-6h2v2h-2V8zm0 4h2v2h-2v-2zm4-4h2v2h-2V8zm0 4h2v2h-2v-2z" fill="currentColor"/></svg>
+            </span>
+            <span class="login-link__text">Ler QR Code</span>
+          </a>
+        </div>
+        <p class="login-version">3.8.0</p>
+      </div>
+    </main>
+
+    <!-- 2. Tela de Carregando = mesma tela de login com overlay escuro -->
+    <main id="view-loading" class="view" role="main" aria-live="polite" aria-label="Carregando">
+      <div class="loading-screen loading-screen--same">
+        <div class="loading-overlay">
+          <div class="loading-center">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <p class="loading-text">Aguarde...</p>
+          </div>
+          <div class="loading-bottom">
+            <button type="button" class="btn-govbr btn-govbr--dimmed" disabled>Entrar com gov.br</button>
+            <p class="login-subtitle login-subtitle--dimmed">Clique para criar ou acessar sua conta gov.br</p>
+            <span class="login-link login-link--dimmed"><span class="login-link__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 12l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span class="login-link__text">Gerar código de acesso</span></span>
+            <span class="login-link login-link--dimmed"><span class="login-link__icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h5v5H3V3zm2 2v1h1V5H5zm10-2h5v5h-5V3zm2 2v1h1V5h-1zM3 14h5v5H3v-5zm2 2v1h1v-1H5zm10-2h5v5h-5v-5zm2 2v1h1v-1h-1zm-6-6h2v2h-2V8zm0 4h2v2h-2v-2zm4-4h2v2h-2V8zm0 4h2v2h-2v-2z" fill="currentColor"/></svg></span><span class="login-link__text">Ler QR Code</span></span>
+          </div>
+          <p class="login-version login-version--dimmed">3.8.0</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- 3. Página inicial: banner em cima de tudo, depois conteúdo igual ao original -->
+    <main id="view-home" class="view" role="main" aria-label="Início">
+      <!-- Banner em cima de tudo (images/banner.png) -->
+      <section class="home-banner-top" aria-hidden="true">
+        <img src="images/banner.png" alt="" class="home-banner-top__img" />
+      </section>
+
+      
+
+      <div class="home-content">
+        <div class="search-wrap">
+          <input type="search" class="search-input" placeholder="Encontre serviços do Governo d..." aria-label="Buscar serviços" />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+
+        <section class="services-section">
+          <h3 class="services-section__title">Serviços</h3>
+          <ul class="services-list" role="list">
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3zm-1 14l-4-4 1.41-1.41L11 13.17l4.59-4.58L17 10l-6 6z" fill="currentColor"/></svg></span><span class="service-item__label">Gerar código de acesso</span><span class="service-item__arrow">›</span></a></li>
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="currentColor"/></svg></span><span class="service-item__label">Agenda gov.br</span><span class="badge badge--new">NOVO</span><span class="service-item__arrow">›</span></a></li>
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor"/></svg></span><span class="service-item__label">Caixa Postal</span><span class="badge badge--new">NOVO</span><span class="service-item__arrow">›</span></a></li>
+            <li><a href="#" class="service-item" data-open="carteira"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8z" fill="currentColor"/></svg></span><span class="service-item__label">Carteira de documentos</span><span class="badge badge--count">2</span><span class="service-item__arrow">›</span></a></li>
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 14H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" fill="currentColor"/></svg></span><span class="service-item__label">Assinar documentos digitalmente</span><span class="service-item__arrow">›</span></a></li>
+          </ul>
+        </section>
+
+        <section class="services-section">
+          <h3 class="services-section__title">Minha conta</h3>
+          <ul class="services-list" role="list">
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="currentColor"/></svg></span><span class="service-item__label">Dados pessoais</span><span class="service-item__arrow">›</span></a></li>
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" fill="currentColor"/></svg></span><span class="service-item__label">Segurança da conta</span><span class="service-item__arrow">›</span></a></li>
+            <li><a href="#" class="service-item"><span class="service-item__icon service-item__icon--blue" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V5l-8-3zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" fill="currentColor"/></svg></span><span class="service-item__label">Privacidade</span><span class="service-item__arrow">›</span></a></li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Bottom Navigation (ícones iguais ao projeto referência) -->
+      <nav class="bottom-nav" role="navigation" aria-label="Navegação principal">
+        <a href="#" class="bottom-nav__item bottom-nav__item--active" data-view="home" aria-current="page">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Início</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="dados">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Dados</span>
+        </a>
+        <a href="#" class="bottom-nav__item bottom-nav__item--qr" data-view="qr">
+          <span class="bottom-nav__qr-circle" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h-2v2h2v2h2v-2h2v-2h-4zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">QR Code</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="carteira">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Carteira</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="menu">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Menu</span>
+        </a>
+      </nav>
+    </main>
+
+    <!-- 4. Carteira de documentos (mesmo layout: banner, header com volta, conteúdo, rodapé) -->
+    <main id="view-carteira" class="view" role="main" aria-label="Carteira de documentos">
+      <section class="home-banner-top" aria-hidden="true">
+        <img src="images/miniBanner.png" alt="" class="home-banner-top__img" />
+      </section>
+
+      <header class="carteira-header">
+        <button type="button" class="carteira-header__back" id="btn-carteira-back" aria-label="Voltar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/></svg>
+        </button>
+        <h1 class="carteira-header__title">Carteira de documentos</h1>
+        <div class="avatar avatar--sm" aria-hidden="true"><span>BR</span></div>
+      </header>
+
+      <div class="carteira-content">
+        <button type="button" class="doc-card" id="btn-doc-card" aria-label="Documento: Carteira de Identidade - BRYAN HENRYK SICOLI DE MENEZES - CPF 448.299.838-92">
+          <img src="images/card.png" alt="Carteira de Identidade - BRYAN HENRYK SICOLI DE MENEZES - CPF 448.299.838-92" class="doc-card__img" />
+        </button>
+      </div>
+
+      <div class="carteira-actions">
+        <button type="button" class="btn-add-doc" id="btn-add-doc">Adicionar Documento</button>
+      </div>
+
+      <nav class="bottom-nav" role="navigation" aria-label="Navegação principal">
+        <a href="#" class="bottom-nav__item" data-view="home">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Início</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="dados">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Dados</span>
+        </a>
+        <a href="#" class="bottom-nav__item bottom-nav__item--qr" data-view="qr">
+          <span class="bottom-nav__qr-circle" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h-2v2h2v2h2v-2h2v-2h-4zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">QR Code</span>
+        </a>
+        <a href="#" class="bottom-nav__item bottom-nav__item--active" data-view="carteira">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Carteira</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="menu">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Menu</span>
+        </a>
+      </nav>
+    </main>
+
+    <!-- 5. Visualização do documento (cpf1 / cpf2) - ao clicar no card -->
+    <main id="view-document" class="view" role="main" aria-label="Documento de identificação">
+      
+
+      
+
+      <div class="doc-viewer-content">
+        <div class="doc-viewer-area" id="doc-viewer-area">
+          <img id="doc-viewer-img" src="images/cpf1.png" alt="Documento de identificação" class="doc-viewer-img" />
+          <span class="doc-viewer-tap doc-viewer-tap--left" id="doc-tap-prev" aria-hidden="true"></span>
+          <span class="doc-viewer-tap doc-viewer-tap--right" id="doc-tap-next" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="doc-viewer-actions">
+        <button type="button" class="doc-action-btn doc-action-btn--lupa" id="btn-doc-lupa" aria-label="Ampliar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" fill="currentColor"/></svg>
+        </button>
+        <div class="doc-dots" id="doc-dots" role="tablist" aria-label="Passo do documento">
+          <span class="doc-dots__dot doc-dots__dot--active" data-step="1" aria-current="true"></span>
+          <span class="doc-dots__dot" data-step="2"></span>
+          <span class="doc-dots__dot" data-step="3"></span>
+          <span class="doc-dots__dot" data-step="4"></span>
+        </div>
+        <button type="button" class="doc-action-btn doc-action-btn--menu" id="btn-doc-menu" aria-label="Mais opções">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/></svg>
+        </button>
+      </div>
+
+      <nav class="bottom-nav" role="navigation" aria-label="Navegação principal">
+        <a href="#" class="bottom-nav__item" data-view="home">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Início</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="dados">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Dados</span>
+        </a>
+        <a href="#" class="bottom-nav__item bottom-nav__item--qr" data-view="qr">
+          <span class="bottom-nav__qr-circle" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h-2v2h2v2h2v-2h2v-2h-4zm-4 4h2v2h-2v-2zm4 0h2v2h-2v-2z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">QR Code</span>
+        </a>
+        <a href="#" class="bottom-nav__item bottom-nav__item--active" data-view="carteira">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Carteira</span>
+        </a>
+        <a href="#" class="bottom-nav__item" data-view="menu">
+          <span class="bottom-nav__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" fill="currentColor"/></svg></span>
+          <span class="bottom-nav__label">Menu</span>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@govbr-ds/core@3.7.0/dist/core.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
